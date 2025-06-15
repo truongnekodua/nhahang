@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà hàng MINA - Đặt Món Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --mau-hong-chinh: #e84393;
+            --mau-hong-nhat: #fdf2f7;
+            --mau-nen: #f8f9fa;
+            --mau-chu: #333;
+            --mau-trang: #fff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--mau-nen);
+            color: var(--mau-chu);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: var(--mau-trang);
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: var(--mau-hong-chinh);
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        nav ul { list-style: none; margin: 0; padding: 0; }
+        nav ul li { display: inline-block; margin-left: 25px; }
+        nav a {
+            text-decoration: none;
+            color: var(--mau-chu);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover, .nav-cart:hover { color: var(--mau-hong-chinh); }
+        .nav-cart {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hero {
+            background-color: var(--mau-hong-nhat);
+            color: var(--mau-chu);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .hero h2 { font-size: 3rem; color: var(--mau-hong-chinh); margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .btn {
+            background-color: var(--mau-hong-chinh);
+            color: var(--mau-trang);
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--mau-hong-chinh);
+        }
+        .btn:hover { 
+            background-color: var(--mau-trang);
+            color: var(--mau-hong-chinh);
+        }
+        #about {
+            padding: 4rem 0;
+            background-color: var(--mau-trang);
+        }
+        .about-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        .about-content, .about-image { flex: 1; }
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--mau-hong-chinh);
+            margin-bottom: 1.5rem;
+        }
+        .about-content p {
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        #menu { padding: 4rem 0; }
+        .category { margin-bottom: 3rem; }
+        .category-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--mau-chu);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background-color: var(--mau-trang);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.15);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-info h3 { margin-top: 0; font-size: 1.3rem; }
+        .product-info .description {
+            font-size: 0.9rem;
+            color: #666;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price {
+            color: var(--mau-hong-chinh);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .add-to-cart-btn {
+            background-color: var(--mau-hong-chinh);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        .add-to-cart-btn:hover { opacity: 0.85; }
+
+        /* --- CẬP NHẬT CHÂN TRANG --- */
+        footer {
+            background-color: var(--mau-hong-chinh); /* Đổi nền thành màu hồng */
+            color: var(--mau-trang); /* Chữ màu trắng nổi bật */
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        footer i { /* Tinh chỉnh icon một chút */
+            margin: 0 10px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo"><i class="fa-solid fa-cat"></i> MINA</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">Về MINA</a></li>
+                    <li><a href="#menu">Thực Đơn</a></li>
+                    <li><a href="#">Khuyến Mãi</a></li>
+                    <li><a href="#" class="nav-cart">🛒 Giỏ Hàng (0)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+       <section class="hero"><div class="container"><h2>Hương vị ngọt ngào, Không gian xinh xắn</h2><p>Thưởng thức những món ăn và thức uống được chế biến bằng cả trái tim tại MINA.</p><a href="#menu" class="btn">Xem Thực Đơn</a></div></section><section id="about"><div class="container about-wrapper"><div class="about-content"><h2>Chào mừng đến với MINA</h2><p>MINA không chỉ là một nhà hàng, mà còn là nơi bạn có thể tìm thấy niềm vui trong từng món ăn, sự ấm cúng trong không gian và sự tận tâm trong phục vụ. Chúng tôi tin rằng những bữa ăn ngon sẽ kết nối mọi người lại với nhau.</p><p>Với thực đơn đa dạng được chế biến từ nguyên liệu tươi ngon chọn lọc, MINA mong muốn mang đến cho bạn những trải nghiệm ẩm thực đáng nhớ.</p></div><div class="about-image"><img src="https://halotravel.vn/wp-content/uploads/2021/02/nha-hang-sang-trong-o-sai-gon-Parkview-Buffet-1.jpg" alt="Không gian nhà hàng MINA"></div></div></section><section id="menu"><div class="container"><h2 class="category-title">Khám Phá Thực Đơn Của Chúng Tôi</h2><div class="category"><h3 style="text-align:center; font-size: 1.8rem; font-weight: 500; color: #555;">Món Lẩu</h3><div class="product-grid"><div class="product-card"><img src="https://bing.com/th?id=OSK.1e1f1b6efa50879611ea3c3d750d04f8" alt="Lẩu Thái Tom Yum"><div class="product-info"><h3>Lẩu Thái Tom Yum</h3><p class="description">Vị chua cay đặc trưng của sả, lá chanh và ớt hiểm Thái.</p><div class="product-footer"><p class="price">299.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://storage.quannhautudo.com/data/thumb_800/Data/images/product/2023/06/202306061106224767.webp" alt="Lẩu Kim Chi Bò Mỹ"><div class="product-info"><h3>Lẩu Kim Chi Bò Mỹ</h3><p class="description">Kim chi cay nồng chuẩn vị Hàn, ăn kèm ba chỉ bò Mỹ mềm tan.</p><div class="product-footer"><p class="price">329.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://toplist.vn/images/800px/hiroshima-lau-nam-thien-nhien-1004234.jpg" alt="Lẩu Nấm Thiên Nhiên"><div class="product-info"><h3>Lẩu Nấm Thiên Nhiên</h3><p class="description">Nước dùng ngọt thanh từ xương hầm và các loại nấm bổ dưỡng.</p><div class="product-footer"><p class="price">279.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div></div></div><div class="category"><h3 style="text-align:center; font-size: 1.8rem; font-weight: 500; color: #555;">Món Chiên</h3><div class="product-grid"><div class="product-card"><img src="https://th.bing.com/th/id/OIP.hSrbDr9LQRnIRq7PRn4sPgHaEK?r=0&rs=1&pid=ImgDetMain" alt="Cánh Gà Chiên Nước Mắm"><div class="product-info"><h3>Cánh Gà Chiên Mắm</h3><p class="description">Cánh gà giòn rụm, áo một lớp sốt mắm tỏi đậm đà, thơm lừng.</p><div class="product-footer"><p class="price">120.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://th.bing.com/th/id/R.4e313b44e026d51088f0d23ec16808e3?rik=0KT7ls3imyoyXw&pid=ImgRaw&r=0&sres=1&sresct=1" alt="Nem Rán Hà Nội (Chả Giò)"><div class="product-info"><h3>Nem Rán Hà Nội</h3><p class="description">Vỏ nem giòn tan, nhân đầy đặn thịt và miến, chấm cùng nước mắm chua ngọt.</p><div class="product-footer"><p class="price">90.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://th.bing.com/th/id/OIP.qRCoppSlCd9kRV_ZFqKXfAHaEo?r=0&rs=1&pid=ImgDetMain" alt="Đậu Hũ Chiên Sả Ớt"><div class="product-info"><h3>Đậu Hũ Chiên Sả Ớt</h3><p class="description">Đậu hũ non bên trong mềm mịn, vỏ ngoài vàng giòn, thơm vị sả ớt.</p><div class="product-footer"><p class="price">75.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div></div></div><div class="category"><h3 style="text-align:center; font-size: 1.8rem; font-weight: 500; color: #555;">Nước Uống</h3><div class="product-grid"><div class="product-card"><img src="https://th.bing.com/th/id/OIP.nUDz8X3RAO7t8EPkvOvHUAHaE8?r=0&rs=1&pid=ImgDetMain" alt="Trà Đào Cam Sả"><div class="product-info"><h3>Trà Đào Cam Sả</h3><p class="description">Sự kết hợp sảng khoái giữa trà đào, cam tươi và hương sả thư giãn.</p><div class="product-footer"><p class="price">55.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://th.bing.com/th/id/OIP.0cTek1lyYwOXn7BtRjrCGAHaE8?r=0&rs=1&pid=ImgDetMain" alt="Cà Phê Sữa Đá"><div class="product-info"><h3>Cà Phê Sữa Đá</h3><p class="description">Cà phê Robusta đậm đắng hòa quyện cùng vị ngọt béo của sữa đặc.</p><div class="product-footer"><p class="price">35.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://noithatcaphe.vn/images/2022/07/16/nuocchanhday-1.jpg" alt="Nước Chanh Dây"><div class="product-info"><h3>Nước Chanh Dây</h3><p class="description">Vị chua ngọt thanh mát của chanh dây giúp giải nhiệt tức thì.</p><div class="product-footer"><p class="price">40.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://th.bing.com/th/id/R.ea54c92e452b50cf6f52cfc29f203fd3?rik=yROFApOksYZG8Q&riu=http%3a%2f%2ffile.hstatic.net%2f1000135323%2farticle%2fcach-pha-matcha-latte_686784fd460e4934974f2e4125e843a0.jpg&ehk=muqQHuGrjAZPn%2b%2fmbgqDCxUA6x5wqWQYD5F991plPlI%3d&risl=&pid=ImgRaw&r=0" alt="Trà xanh Matcha Latte"><div class="product-info"><h3>Trà xanh Matcha Latte</h3><p class="description">Bột matcha Nhật Bản nguyên chất, quyện cùng sữa tươi tạo vị béo ngậy.</p><div class="product-footer"><p class="price">60.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://delys.com.vn/wp-content/uploads/2020/08/cach-lam-sua-chua-dau-tam-compressed.jpg" alt="Sữa chua Dâu tằm"><div class="product-info"><h3>Sữa chua Dâu tằm</h3><p class="description">Sữa chua Hy Lạp sánh mịn, kết hợp với mứt dâu tằm chua ngọt nhà làm.</p><div class="product-footer"><p class="price">65.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div><div class="product-card"><img src="https://th.bing.com/th/id/OIP.k4h-8R963421Ji2EvZUYkAHaHa?r=0&rs=1&pid=ImgDetMain" alt="Soda Việt quất"><div class="product-info"><h3>Soda Việt quất</h3><p class="description">Soda Ý mát lạnh cùng syrup việt quất và những trái mọng tươi.</p><div class="product-footer"><p class="price">50.000₫</p><button class="add-to-cart-btn">Thêm vào giỏ</button></div></div></div></div></div></div></section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                <i class="fa-solid fa-paw"></i> &copy; 2025 Nhà hàng MINA. Hân hạnh phục vụ! <i class="fa-solid fa-paw"></i>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
